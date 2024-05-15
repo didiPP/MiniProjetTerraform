@@ -1,7 +1,9 @@
 // main.tf
 
+#
+
 module "ec2_instance" {
-  source            = "./modules/ec2_instance"
+  source            = "./Modules/1_instance_ec2"
   instance_type     = var.instance_type
   instance_size     = var.instance_size
   volume_size       = var.volume_size
@@ -10,15 +12,15 @@ module "ec2_instance" {
 }
 
 module "ebs_volume" {
-  source      = "./modules/ebs_volume"
+  source      = "./Modules/2_volume_EBS"
   volume_size = var.volume_size
 }
 
 module "public_ip" {
-  source       = "./modules/public_ip"
+  source       = "./Modules/3_IP_publique"
   instance_id  = module.ec2_instance.instance_id
 }
 
 module "security_group" {
-  source = "./modules/security_group"
+  source = "./Module/4_security_group"
 }
